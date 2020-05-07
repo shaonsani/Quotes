@@ -25,9 +25,9 @@ def Quotes_form(req,id=0):
             form = QuotesForm(req.POST,instance=from_database)
         if form.is_valid():
             form.save()
-        return redirect('/list')
+        return redirect('/')
 
 def Quotes_delete(req,id):
     from_database= Quotes.objects.get(pk=id)
     from_database.delete()
-    return redirect('/list')
+    return redirect('/')
