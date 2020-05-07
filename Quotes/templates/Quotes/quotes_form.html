@@ -1,0 +1,39 @@
+{% extends 'Quotes/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form class="" action="" method="POST" autocomplete="off">
+  <!---{{form|crispy}} -->
+  {{form.q_code|as_crispy_field}}
+  {{form.quotes|as_crispy_field}}
+  <div class="row">
+
+    <div class="col-md-6">
+        {{form.author_name|as_crispy_field}}
+    </div>
+    <div class="col-md-4">
+        {{form.catagory|as_crispy_field}}
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      {% if para %}
+      <button type="submit"  class="btn btn-success btn-block btn-lg">
+      <i class="fas fa-databas" ></i> Update
+      </button>
+      {% else %}
+      <button type="submit"  class="btn btn-success btn-block btn-lg ">
+      <i class="fas fa-databas" ></i> Submit
+      </button>
+      {%endif%}
+    </div>
+
+
+  </div>
+
+  {% csrf_token %}
+</form>
+
+
+{% endblock content %}

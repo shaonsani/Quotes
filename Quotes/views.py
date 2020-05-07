@@ -1,33 +1,33 @@
 from django.shortcuts import render,redirect
-from .forms import EmployeeForm
-from .models import Employee
+from .forms import QuotesForm
+from .models import Quotes
 
-def employee_list(req):
-    context = {'employee_list':Employee.objects.all()}
-    return render(req,'Quotes/employee_list.html',context)
+def Quotes_list(req):
+    context = {'quotes_list':Quotes.objects.all()}
+    return render(req,'Quotes/quotes_list.html',context)
 
-def employee_form(req,id=0):
+def Quotes_form(req,id=0):
     para=False
     if req.method =='GET':
         if id==0:                   # This condition is for Insert, when insert id =0
-            form =EmployeeForm()
+            form =QuotesForm()
         else:                        # This condition is for Update, when update btn click corresponding employee key is passed
-            from_database = Employee.objects.get(pk=id)
-            form = EmployeeForm(instance=from_database)
+            from_database = Quotes.objects.get(pk=id)
+            form = QuotesForm(instance=from_database)
             para =True
         dist = {'form':form,'para':para}
-        return render(req,'Quotes/employee_form.html',context=dist)
+        return render(req,'Quotes/quotes_form.html',context=dist)
     else:
         if id==0:
-            form =EmployeeForm(req.POST)
+            form =QuotesForm(req.POST)
         else:
-            from_database= Employee.objects.get(pk=id)
-            form = EmployeeForm(req.POST,instance=from_database)
+            from_database= Quotes.objects.get(pk=id)
+            form = QuotesForm(req.POST,instance=from_database)
         if form.is_valid():
             form.save()
-        return redirect('/Quotes/list')
+        return redirect('/list')
 
-def employee_delete(req,id):
-    from_database= Employee.objects.get(pk=id)
+def Quotes_delete(req,id):
+    from_database= Quotes.objects.get(pk=id)
     from_database.delete()
-    return redirect('/Quotes/list')
+    return redirect('/list')

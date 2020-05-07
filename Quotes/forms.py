@@ -1,17 +1,18 @@
 from django import forms
-from .models import Employee
+from .models import Quotes
 
-class EmployeeForm(forms.ModelForm):
+class QuotesForm(forms.ModelForm):
+    quotes =forms.CharField( widget=forms.Textarea )
     class Meta:
-        model= Employee
-        fields = '__all__'
+        model= Quotes
+        fields = ('__all__')
 
         labels={
-            'fullname':'Full Name',
-            'emp_code':'EMP. Code',
+            'q_code':'Q.Code',
+            'author_name':'Author',
+            'catagory':'Type',
         }
 
     def __init__(self,*arg,**kwargs):
-        super(EmployeeForm,self).__init__(*arg,**kwargs)
-        self.fields['position'].empty_label='Select'
-        self.fields['emp_code'].required = False
+        super(QuotesForm,self).__init__(*arg,**kwargs)
+        self.fields['catagory'].empty_label='Select'
